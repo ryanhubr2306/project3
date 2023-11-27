@@ -93,4 +93,5 @@ void Stack<T>::swap(T& a, T& b) {
 // Explicit template instantiation
 template class Stack<int>;
 template class Stack<double>;
+template class Stack<char>;
 // Add more explicit instantiations if needed for other types

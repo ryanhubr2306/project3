@@ -28,37 +28,28 @@ public:
         *this = other;
     }
 
-    Stack<T>& operator=(const Stack<T>& other) { // Assignment operator
-        if (this != &other) {
-            while (!isEmpty()) {
-                pop();
-            }
-
-            Node* current = other.top;
-            Node* tempTop = nullptr, *newNode;
-
-            while (current) {
-                newNode = new Node{current->data, nullptr};
-
-                if (tempTop == nullptr) {
-                    tempTop = newNode;
-                } else {
-                    newNode->next = tempTop;
-                    tempTop = newNode;
-                }
-                current = current->next;
-            }
-
-            while (tempTop) {
-                push(tempTop->data);
-                Node* toDelete = tempTop;
-                tempTop = tempTop->next;
-                delete toDelete;
-            }
+    Stack<T>& operator=(const Stack<T>& other) {
+    if (this != &other) {
+        while (!isEmpty()) {
+            pop();
         }
 
-        return *this;
+        Stack<T> tempStack;
+        Node* current = other.top;
+
+        while (current) {
+            tempStack.push(current->data);
+            current = current->next;
+        }
+
+        while (!tempStack.isEmpty()) {
+            push(tempStack.pop());
+        }
     }
+
+    return *this;
+}
+
 
     void push(const T& item) {
         if (isFull()) {
